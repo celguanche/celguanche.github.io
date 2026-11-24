@@ -7,25 +7,37 @@
   <title>Luis Ernesto Guanche Queija · Portfolio DAM</title>
   <meta
     name="description"
-    content="Portfolio de Luis Ernesto Guanche Queija, estudiante de 2.º de DAM en Madrid. Aplicaciones de escritorio e integración de datos con Java, JavaFX y MySQL."
+    content="Portfolio de Luis Ernesto Guanche Queija, estudiante de 2.º de DAM en Madrid. Aplicaciones de escritorio en Java y JavaFX, transacciones JDBC con MySQL e importación de datos."
+  >
+
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23194abd'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' fill='white' font-family='Arial,sans-serif' font-size='28' font-weight='700'%3ELG%3C/text%3E%3C/svg%3E"
   >
 
   <style>
     :root {
       --background: #f7f6f3;
       --surface: #ffffff;
+      --surface-subtle: #fbfaf8;
       --text: #1a1917;
       --muted: #595750;
       --accent: #194abd;
+      --accent-hover: #12388e;
       --accent-light: #eaf0ff;
       --border: #dedcd4;
-      --content-width: 60rem;
+      --content-width: 62rem;
     }
 
     *,
     *::before,
     *::after {
       box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
@@ -47,23 +59,23 @@
     h3 {
       margin-top: 0;
       line-height: 1.15;
-      letter-spacing: -0.035em;
+      letter-spacing: -0.03em;
     }
 
     h1 {
       max-width: 16ch;
       margin-bottom: 1.2rem;
-      font-size: clamp(2.7rem, 7vw, 4.8rem);
+      font-size: clamp(2.6rem, 6.8vw, 4.6rem);
     }
 
     h2 {
       margin-bottom: 1.5rem;
-      font-size: clamp(1.7rem, 4vw, 2.2rem);
+      font-size: clamp(1.7rem, 3.8vw, 2.2rem);
     }
 
     h3 {
-      margin-bottom: 0.6rem;
-      font-size: 1.25rem;
+      margin-bottom: 0.55rem;
+      font-size: 1.3rem;
     }
 
     p {
@@ -75,18 +87,26 @@
       text-underline-offset: 0.2em;
     }
 
-    a:focus-visible {
+    a:hover {
+      color: var(--accent-hover);
+    }
+
+    a:focus-visible,
+    button:focus-visible {
       outline: 3px solid var(--accent);
-      outline-offset: 4px;
+      outline-offset: 3px;
     }
 
     .skip-link {
       position: absolute;
       top: -5rem;
       left: 1rem;
-      z-index: 2;
+      z-index: 20;
       padding: 0.5rem 0.9rem;
+      border-radius: 0.4rem;
       background: var(--surface);
+      color: var(--text);
+      font-weight: 600;
     }
 
     .skip-link:focus {
@@ -94,6 +114,11 @@
     }
 
     header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(247, 246, 243, 0.92);
+      backdrop-filter: blur(8px);
       border-bottom: 1px solid var(--border);
     }
 
@@ -108,7 +133,7 @@
 
     .navigation {
       justify-content: space-between;
-      padding-block: 1rem;
+      padding-block: 0.95rem;
     }
 
     .navigation a {
@@ -126,11 +151,11 @@
     }
 
     .navigation-links {
-      font-size: 0.9rem;
+      font-size: 0.92rem;
     }
 
     main section {
-      padding-block: 3rem;
+      padding-block: 3.2rem;
       border-bottom: 1px solid var(--border);
     }
 
@@ -139,38 +164,133 @@
     }
 
     .hero {
-      padding-block: clamp(3.5rem, 8vw, 6rem);
+      padding-block: clamp(3.2rem, 7vw, 5.2rem);
     }
 
     .eyebrow {
-      margin-bottom: 0.8rem;
+      margin-bottom: 0.65rem;
       color: var(--accent);
       font-family: ui-monospace, monospace;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
     }
 
     .intro {
-      max-width: 63ch;
-      font-size: 1.12rem;
+      max-width: 64ch;
+      font-size: 1.1rem;
     }
 
     .actions {
-      margin-top: 1.5rem;
+      margin-top: 1.4rem;
     }
 
     .button {
-      display: inline-block;
-      padding: 0.65rem 1.1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.65rem 1.15rem;
       border-radius: 0.5rem;
+      border: 1px solid var(--text);
       background: var(--text);
-      color: white;
+      color: #ffffff;
+      font-size: 0.95rem;
       font-weight: 600;
       text-decoration: none;
+      cursor: pointer;
     }
 
     .button:hover {
+      border-color: var(--accent);
       background: var(--accent);
+      color: #ffffff;
+    }
+
+    .button-secondary {
+      background: var(--surface);
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    .button-secondary:hover {
+      background: var(--accent-light);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .projects-stack {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .card {
+      padding: clamp(1.25rem, 3vw, 1.85rem);
+      border: 1px solid var(--border);
+      border-radius: 0.9rem;
+      background: var(--surface);
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin: 0.35rem 0 1.15rem;
+      padding: 0;
+      list-style: none;
+    }
+
+    .tags li {
+      padding: 0.22rem 0.6rem;
+      border-radius: 0.4rem;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-family: ui-monospace, monospace;
+      font-size: 0.78rem;
+      font-weight: 500;
+    }
+
+    .features {
+      margin: 0.85rem 0 0;
+      padding-left: 1.2rem;
+    }
+
+    .features li + li {
+      margin-top: 0.5rem;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin-block: 1.15rem 1.25rem;
+    }
+
+    figure {
+      margin: 0;
+      padding: 0.65rem;
+      border: 1px solid var(--border);
+      border-radius: 0.7rem;
+      background: var(--surface-subtle);
+    }
+
+    figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      border-radius: 0.45rem;
+      border: 1px solid var(--border);
+      cursor: zoom-in;
+      background: #e9e7e0;
+    }
+
+    figcaption {
+      margin-top: 0.5rem;
+      color: var(--muted);
+      font-size: 0.84rem;
+      line-height: 1.4;
     }
 
     .grid {
@@ -179,80 +299,36 @@
       gap: 1rem;
     }
 
-    .card {
-      padding: clamp(1.2rem, 3vw, 1.75rem);
-      border: 1px solid var(--border);
-      border-radius: 0.9rem;
-      background: var(--surface);
-    }
-
-    .project {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .project-link {
-      align-self: flex-start;
-      margin-top: auto;
-      padding-top: 0.75rem;
-      font-weight: 600;
-    }
-
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin: 0.25rem 0 1.1rem;
-      padding: 0;
-      list-style: none;
-    }
-
-    .tags li {
-      padding: 0.2rem 0.55rem;
-      border-radius: 0.4rem;
-      background: var(--accent-light);
-      color: var(--accent);
-      font-family: ui-monospace, monospace;
-      font-size: 0.78rem;
-    }
-
-    .features {
-      margin: 0 0 1rem;
-      padding-left: 1.2rem;
-    }
-
-    .features li + li {
-      margin-top: 0.5rem;
-    }
-
     .meta {
       margin-bottom: 0.65rem;
       color: var(--muted);
       font-size: 0.9rem;
     }
 
-    .entry + .entry {
-      margin-top: 1.35rem;
-      padding-top: 1.35rem;
-      border-top: 1px solid var(--border);
-    }
-
-    .entry p:last-child,
     .card > p:last-child {
       margin-bottom: 0;
     }
 
     .skills {
       display: grid;
-      grid-template-columns: minmax(9rem, 0.35fr) 1fr;
+      grid-template-columns: minmax(11rem, 0.32fr) 1fr;
       margin: 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 0.9rem;
+      padding-inline: clamp(1.2rem, 3vw, 1.75rem);
     }
 
     .skills dt,
     .skills dd {
       margin: 0;
-      padding-block: 0.75rem;
+      padding-block: 0.85rem;
       border-bottom: 1px solid var(--border);
+    }
+
+    .skills dt:last-of-type,
+    .skills dd:last-of-type {
+      border-bottom: 0;
     }
 
     .skills dt {
@@ -264,8 +340,14 @@
       color: var(--muted);
     }
 
+    .contact-details {
+      margin-top: 1rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
     footer {
-      padding-block: 1.2rem;
+      padding-block: 1.3rem;
       border-top: 1px solid var(--border);
       color: var(--muted);
       font-size: 0.85rem;
@@ -275,6 +357,54 @@
       margin-bottom: 0;
     }
 
+    /* Lightbox sencillo para ampliar capturas */
+    dialog.lightbox {
+      max-width: min(92vw, 72rem);
+      width: auto;
+      padding: 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: 0.85rem;
+      background: var(--surface);
+      color: var(--text);
+    }
+
+    dialog.lightbox::backdrop {
+      background: rgba(26, 25, 23, 0.72);
+    }
+
+    dialog.lightbox img {
+      display: block;
+      max-width: 100%;
+      max-height: 76vh;
+      border-radius: 0.45rem;
+    }
+
+    .lightbox-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 0.7rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .close-btn {
+      padding: 0.35rem 0.75rem;
+      border-radius: 0.4rem;
+      border: 1px solid var(--border);
+      background: var(--background);
+      color: var(--text);
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    @media (max-width: 48rem) {
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+    }
+
     @media (max-width: 38rem) {
       .navigation {
         align-items: flex-start;
@@ -282,7 +412,7 @@
       }
 
       .navigation-links {
-        gap: 0.5rem 1rem;
+        gap: 0.45rem 1rem;
       }
 
       .skills {
@@ -290,12 +420,12 @@
       }
 
       .skills dt {
-        padding-bottom: 0;
+        padding-bottom: 0.1rem;
         border-bottom: 0;
       }
 
       .skills dd {
-        padding-top: 0.2rem;
+        padding-top: 0.15rem;
       }
     }
   </style>
@@ -324,97 +454,154 @@
       <h1 id="nombre">Luis Ernesto Guanche Queija</h1>
 
       <p class="intro">
-        Estudio 2.º de Desarrollo de Aplicaciones Multiplataforma.
-        Mi proyecto principal es <strong>FarmaGest</strong>, una aplicación
-        de escritorio que conecta las compras y ventas de una farmacia
-        con su inventario.
+        Estudiante de 2.º de Desarrollo de Aplicaciones Multiplataforma (DAM) en
+        Madrid, centrado en aplicaciones de escritorio con <strong>Java y JavaFX</strong>,
+        acceso a datos transaccional en <strong>MySQL</strong> e integración y
+        automatización de datos.
       </p>
 
       <p>
-        Busco prácticas curriculares donde pueda seguir desarrollando
-        aplicaciones con Java y trabajar con bases de datos.
+        Busco prácticas curriculares donde aportar rigor técnico en desarrollo
+        de software, bases de datos y conexión de aplicaciones o servicios.
       </p>
 
       <div class="actions">
-        <a class="button" href="#farmagest">Ver FarmaGest</a>
-        <a href="mailto:celguanche@gmail.com">Contactar por email</a>
+        <a class="button" href="#farmagest">Ver proyectos</a>
+        <a class="button button-secondary" href="assets/Luis-E-Guanche-EN.pdf" download>
+          Descargar CV (PDF)
+        </a>
+        <a href="mailto:celguanche@gmail.com">celguanche@gmail.com</a>
       </div>
     </section>
 
     <section id="proyectos" aria-labelledby="titulo-proyectos">
       <h2 id="titulo-proyectos">Proyectos</h2>
 
-      <article id="farmagest" class="card project" aria-labelledby="titulo-farmagest">
-        <p class="eyebrow">Proyecto principal</p>
-        <h3 id="titulo-farmagest">FarmaGest</h3>
+      <div class="projects-stack">
+        <article id="farmagest" class="card project" aria-labelledby="titulo-farmagest">
+          <p class="eyebrow">Proyecto principal</p>
+          <h3 id="titulo-farmagest">FarmaGest</h3>
 
-        <p class="intro">
-          Una aplicación de escritorio para gestionar una farmacia y seguir
-          cómo cambia el stock de cada producto con las compras y las ventas.
-        </p>
+          <p class="intro">
+            Aplicación JavaFX con arquitectura en capas (servicios y DAO) que
+            registra cada venta y descuenta el stock por lote en una única
+            transacción JDBC. Si algún producto carece de existencias
+            suficientes, se revierte toda la venta.
+          </p>
 
-        <ul class="tags" aria-label="Tecnologías de FarmaGest">
-          <li>Java</li>
-          <li>JavaFX</li>
-          <li>JDBC</li>
-          <li>MySQL</li>
-        </ul>
+          <ul class="tags" aria-label="Tecnologías de FarmaGest">
+            <li>Java</li>
+            <li>JavaFX</li>
+            <li>JDBC</li>
+            <li>MySQL</li>
+            <li>Transacciones</li>
+            <li>Arquitectura en capas</li>
+          </ul>
 
-        <p>
-          Al registrar una venta, el usuario elige un producto, indica la
-          cantidad y puede añadir otra línea antes de confirmar la operación.
-          El mismo flujo permite preparar pedidos de compra con varios
-          productos. La interfaz está desarrollada en JavaFX y las
-          operaciones se guardan en MySQL mediante JDBC.
-        </p>
+          <div class="gallery" aria-label="Capturas de pantalla de FarmaGest">
+            <figure>
+              <img
+                src="assets/farmagest-inicio.png"
+                alt="Panel de inicio de FarmaGest mostrando métricas de productos activos, stock bajo, lotes por caducar y tabla de alertas"
+                loading="lazy"
+                data-caption="Resumen de la farmacia: indicadores operativos y alertas de caducidad y stock bajo."
+              >
+              <figcaption>Resumen general y alertas activas.</figcaption>
+            </figure>
 
-        <ul class="features">
-          <li>
-            <strong>Compras y proveedores.</strong>
-            Gestión de proveedores y registro de pedidos con sus productos
-            y cantidades.
-          </li>
-          <li>
-            <strong>Ventas e inventario.</strong>
-            Registro de ventas y seguimiento de las entradas y salidas
-            de existencias.
-          </li>
-          <li>
-            <strong>Gestión de la farmacia.</strong>
-            Administración del catálogo de productos y de los empleados
-            desde la aplicación.
-          </li>
-        </ul>
+            <figure>
+              <img
+                src="assets/farmagest-tpv.png"
+                alt="Ventana de Punto de venta de FarmaGest con selección de producto, unidades, precio base, IVA y cálculo del total"
+                loading="lazy"
+                data-caption="Punto de venta multilínea con cálculo de base imponible, IVA y total antes de confirmar la operación."
+              >
+              <figcaption>Punto de venta y registro de operaciones.</figcaption>
+            </figure>
 
-        <div class="actions">
-          <a class="button" href="https://github.com/celguanche/FarmaGest">
-            Ver FarmaGest en GitHub
-          </a>
-        </div>
-      </article>
+            <figure>
+              <img
+                src="assets/farmagest-inventario.png"
+                alt="Vista de Inventario de FarmaGest con stock mínimo, total, disponible y caducado por producto"
+                loading="lazy"
+                data-caption="Vista consolidada de inventario diferenciando existencias disponibles y caducadas."
+              >
+              <figcaption>Control de existencias disponibles y caducadas.</figcaption>
+            </figure>
 
-      <article aria-labelledby="titulo-importer" style="margin-top: 2rem;">
-        <h3 id="titulo-importer">Customer Data Importer</h3>
+            <figure>
+              <img
+                src="assets/farmagest-lotes.png"
+                alt="Pantalla de lotes de producto en FarmaGest mostrando código de lote, fecha de caducidad, cantidad inicial y disponible"
+                loading="lazy"
+                data-caption="Trazabilidad por lote con fechas de caducidad y unidades disponibles."
+              >
+              <figcaption>Trazabilidad y control por lote.</figcaption>
+            </figure>
+          </div>
 
-        <ul class="tags" aria-label="Tecnologías de Customer Data Importer">
-          <li>Java 21</li>
-          <li>JavaFX</li>
-          <li>JDBC</li>
-          <li>MySQL</li>
-          <li>Apache Commons CSV</li>
-        </ul>
+          <ul class="features">
+            <li>
+              <strong>Integridad transaccional en ventas y stock.</strong>
+              El descuento de existencias por lote y el registro de la venta se
+              ejecutan dentro de una misma transacción JDBC con <em>rollback</em>
+              automático ante falta de stock o fallo.
+            </li>
+            <li>
+              <strong>Separación de responsabilidades.</strong>
+              Organización en capas (interfaz JavaFX, servicios de negocio y DAO
+              con MySQL) para mantener la lógica de stock y persistencia desacoplada.
+            </li>
+            <li>
+              <strong>Gestión operativa de farmacia.</strong>
+              Administración de catálogo, lotes y caducidades, compras a
+              proveedores, ventas, usuarios y auditoría.
+            </li>
+          </ul>
 
-        <p>
-          Herramienta para revisar archivos CSV antes de importar clientes
-          a MySQL. Detecta errores y DNI duplicados, permite comparar los
-          registros existentes y exporta las filas rechazadas para corregirlas.
-          Probé el lector con <strong>500 clientes ficticios de seis campos</strong>.
-        </p>
+          <div class="actions">
+            <a
+              class="button"
+              href="https://github.com/celguanche/FarmaGest"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Ver FarmaGest en GitHub
+            </a>
+          </div>
+        </article>
 
-        <a href="https://github.com/celguanche/CustomerDataImporter">
-          Ver Customer Data Importer en GitHub
-        </a>
-      </article>
+        <article id="importer" class="card project" aria-labelledby="titulo-importer">
+          <p class="eyebrow">Integración de datos</p>
+          <h3 id="titulo-importer">Customer Data Importer</h3>
+
+          <ul class="tags" aria-label="Tecnologías de Customer Data Importer">
+            <li>Java 21</li>
+            <li>JavaFX</li>
+            <li>JDBC</li>
+            <li>MySQL</li>
+            <li>Apache Commons CSV</li>
+          </ul>
+
+          <p>
+            Importador CSV que compara clientes por DNI con MySQL, permite
+            elegir qué datos conservar cuando hay diferencias y registra las
+            filas rechazadas con el motivo. Validado mediante pruebas con lotes
+            de 500 registros para asegurar que un error puntual no detenga
+            el procesamiento del archivo.
+          </p>
+
+          <div class="actions">
+            <a
+              href="https://github.com/celguanche/CustomerDataImporter"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Ver Customer Data Importer en GitHub
+            </a>
+          </div>
+        </article>
+      </div>
     </section>
 
     <section id="formacion" aria-labelledby="titulo-formacion">
@@ -422,25 +609,25 @@
 
       <div class="grid">
         <article class="card">
-          <h3>Desarrollo de Aplicaciones Multiplataforma</h3>
+          <h3>Desarrollo de Aplicaciones Multiplataforma (DAM)</h3>
           <p class="meta">
-            FP Euroformac · Barajas, Madrid · Septiembre de 2025 – actualidad
+            FP Euroformac · Barajas, Madrid · Septiembre 2025 – actualidad
           </p>
           <p>
-            Curso segundo de DAM. Trabajo con programación orientada a
-            objetos, interfaces de escritorio, acceso a datos y desarrollo
-            móvil. También estudio arquitectura cloud en AWS Academy.
+            Segundo curso centrado en programación orientada a objetos,
+            interfaces de escritorio, acceso a bases de datos, desarrollo
+            móvil y fundamentos de arquitectura cloud en AWS Academy.
           </p>
         </article>
 
         <article class="card">
-          <h3>Ingeniería Informática</h3>
+          <h3>Ingeniería Informática (2 años cursados)</h3>
           <p class="meta">
-            Universidad Tecnológica de La Habana · Septiembre de 2022 – abril de 2024
+            Universidad Tecnológica de La Habana · Septiembre 2022 – abril 2024
           </p>
           <p>
-            Cursé dos años de la carrera, con formación en algoritmos,
-            estructuras de datos y programación orientada a objetos.
+            Base académica en algoritmos, estructuras de datos y programación
+            orientada a objetos.
           </p>
         </article>
       </div>
@@ -450,31 +637,35 @@
       <h2 id="titulo-habilidades">Conocimientos técnicos</h2>
 
       <dl class="skills">
-        <dt>Aplicaciones de escritorio</dt>
-        <dd>Java, JavaFX y Maven. Control de versiones con Git y GitHub.</dd>
+        <dt>Aplicaciones y arquitectura</dt>
+        <dd>
+          Java, Java 21, JavaFX y Maven. Arquitectura en capas (servicios y
+          DAO) y control de versiones con Git y GitHub.
+        </dd>
 
         <dt>Bases de datos</dt>
         <dd>
-          SQL, MySQL y JDBC. Consultas con sentencias preparadas,
-          transacciones y prácticas con Oracle SQL.
+          SQL, MySQL, JDBC y Oracle SQL. Sentencias preparadas, gestión de
+          transacciones (<em>commit</em> / <em>rollback</em>) y control de
+          integridad.
         </dd>
 
-        <dt>Tratamiento de datos</dt>
+        <dt>Tratamiento e intercambio de datos</dt>
         <dd>
-          Lectura y validación de CSV, gestión de duplicados y registro
-          de errores por fila. Prácticas con JSON y XML.
+          Importación y validación de CSV (Apache Commons CSV), resolución de
+          conflictos por clave, registro de incidencias y manejo de JSON y XML.
         </dd>
 
-        <dt>Desarrollo móvil y web</dt>
+        <dt>Móvil y web</dt>
         <dd>
-          Prácticas con Kotlin y Jetpack Compose. Conocimientos de HTML,
-          CSS y JavaScript.
+          Prácticas con Kotlin y Jetpack Compose. Conocimientos de HTML, CSS y
+          JavaScript.
         </dd>
 
-        <dt>Formación complementaria</dt>
+        <dt>Cloud y redes</dt>
         <dd>
-          Cloud Foundation (AWS). Networking Basics, Networking Devices
-          and Initial Configuration y C++ Essentials 1 (Cisco).
+          AWS Academy Cloud Foundation. Cisco Networking Basics, Networking
+          Devices and Initial Configuration y C++ Essentials 1.
         </dd>
 
         <dt>Idiomas</dt>
@@ -486,24 +677,70 @@
       <h2 id="titulo-contacto">Contacto</h2>
 
       <p class="intro">
-        Si tu equipo ofrece prácticas de desarrollo en Madrid, puedes
-        escribirme por correo o contactar conmigo en LinkedIn.
+        Disponible para prácticas curriculares de desarrollo de software e
+        integración de datos en Madrid.
       </p>
 
       <div class="actions">
         <a class="button" href="mailto:celguanche@gmail.com">
           celguanche@gmail.com
         </a>
-        <a href="https://github.com/celguanche">GitHub</a>
-        <a href="https://www.linkedin.com/in/celguanche-luis-ernesto/">
+        <a class="button button-secondary" href="assets/Luis_E_Guanche_EN.pdf" download>
+          Descargar CV (PDF)
+        </a>
+        <a
+          href="https://github.com/celguanche"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GitHub
+        </a>
+        <a
+          href="https://www.linkedin.com/in/celguanche-luis-ernesto/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           LinkedIn
         </a>
       </div>
+
+      <p class="contact-details">
+        Madrid · Teléfono: +34 668 517 653
+      </p>
     </section>
   </main>
 
   <footer>
     <p class="container">Luis Ernesto Guanche Queija · Madrid</p>
   </footer>
+
+  <dialog class="lightbox" id="lightbox" aria-label="Vista ampliada de captura">
+    <img id="lightbox-img" src="" alt="">
+    <div class="lightbox-bar">
+      <span id="lightbox-caption"></span>
+      <button class="close-btn" id="lightbox-close" type="button">Cerrar (Esc)</button>
+    </div>
+  </dialog>
+
+  <script>
+    const dialog = document.getElementById("lightbox");
+    const dialogImg = document.getElementById("lightbox-img");
+    const dialogCaption = document.getElementById("lightbox-caption");
+    const closeBtn = document.getElementById("lightbox-close");
+
+    document.querySelectorAll(".gallery img").forEach((img) => {
+      img.addEventListener("click", () => {
+        dialogImg.src = img.src;
+        dialogImg.alt = img.alt;
+        dialogCaption.textContent = img.dataset.caption || img.alt;
+        dialog.showModal();
+      });
+    });
+
+    closeBtn.addEventListener("click", () => dialog.close());
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+  </script>
 </body>
 </html>
