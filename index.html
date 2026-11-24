@@ -310,7 +310,7 @@
 
       <div class="navigation-links">
         <a href="#proyectos">Proyectos</a>
-        <a href="#trayectoria">Trayectoria</a>
+        <a href="#formacion">Formación</a>
         <a href="#habilidades">Habilidades</a>
         <a href="#contacto">Contacto</a>
       </div>
@@ -319,21 +319,24 @@
 
   <main id="contenido" class="container">
     <section class="hero" aria-labelledby="nombre">
-      <p class="eyebrow">2.º de DAM · Madrid</p>
+      <p class="eyebrow">Desarrollo de aplicaciones · Madrid</p>
 
       <h1 id="nombre">Luis Ernesto Guanche Queija</h1>
 
       <p class="intro">
-        Desarrollo aplicaciones de escritorio con Java y MySQL. Con FarmaGest
-        trabajo con pedidos, ventas y existencias. En Customer Data Importer
-        me he centrado en cómo detectar duplicados y recuperar datos cuando
-        falla una importación.
+        Estudio 2.º de Desarrollo de Aplicaciones Multiplataforma.
+        Mi proyecto principal es <strong>FarmaGest</strong>, una aplicación
+        de escritorio que conecta las compras y ventas de una farmacia
+        con su inventario.
       </p>
 
-      <p>Busco prácticas curriculares en desarrollo de software e integración de datos.</p>
+      <p>
+        Busco prácticas curriculares donde pueda seguir desarrollando
+        aplicaciones con Java y trabajar con bases de datos.
+      </p>
 
       <div class="actions">
-        <a class="button" href="#proyectos">Ver proyectos</a>
+        <a class="button" href="#farmagest">Ver FarmaGest</a>
         <a href="mailto:celguanche@gmail.com">Contactar por email</a>
       </div>
     </section>
@@ -341,136 +344,104 @@
     <section id="proyectos" aria-labelledby="titulo-proyectos">
       <h2 id="titulo-proyectos">Proyectos</h2>
 
-      <div class="grid">
-        <article class="card project">
-          <h3>Customer Data Importer</h3>
+      <article id="farmagest" class="card project" aria-labelledby="titulo-farmagest">
+        <p class="eyebrow">Proyecto principal</p>
+        <h3 id="titulo-farmagest">FarmaGest</h3>
 
-          <ul class="tags" aria-label="Tecnologías de Customer Data Importer">
-            <li>Java 21</li>
-            <li>JavaFX</li>
-            <li>JDBC</li>
-            <li>MySQL</li>
-            <li>Apache Commons CSV</li>
-          </ul>
+        <p class="intro">
+          Una aplicación de escritorio para gestionar una farmacia y seguir
+          cómo cambia el stock de cada producto con las compras y las ventas.
+        </p>
 
-          <p>
-            Aplicación de escritorio para revisar un archivo de clientes
-            antes de incorporarlo a MySQL. La vista previa separa los clientes
-            nuevos, los existentes y las filas que necesitan corrección.
-          </p>
+        <ul class="tags" aria-label="Tecnologías de FarmaGest">
+          <li>Java</li>
+          <li>JavaFX</li>
+          <li>JDBC</li>
+          <li>MySQL</li>
+        </ul>
 
-          <ul class="features">
-            <li>
-              Comprueba la letra de control del DNI, el código postal y el
-              formato del correo. También detecta DNI repetidos en el archivo.
-            </li>
-            <li>
-              Permite comparar los datos del CSV con los de MySQL y elegir qué
-              clientes actualizar. Si un campo opcional llega vacío, conserva
-              su valor anterior.
-            </li>
-            <li>
-              Registra los rechazos con fecha, número de línea y motivo.
-              Las filas rechazadas se pueden exportar, corregir y volver a cargar.
-            </li>
-          </ul>
+        <p>
+          Al registrar una venta, el usuario elige un producto, indica la
+          cantidad y puede añadir otra línea antes de confirmar la operación.
+          El mismo flujo permite preparar pedidos de compra con varios
+          productos. La interfaz está desarrollada en JavaFX y las
+          operaciones se guardan en MySQL mediante JDBC.
+        </p>
 
-          <p>
-            Probé el lector con <strong>500 clientes ficticios de seis campos</strong>
-            y mantuve la compatibilidad con los CSV originales de tres columnas.
-          </p>
+        <ul class="features">
+          <li>
+            <strong>Compras y proveedores.</strong>
+            Gestión de proveedores y registro de pedidos con sus productos
+            y cantidades.
+          </li>
+          <li>
+            <strong>Ventas e inventario.</strong>
+            Registro de ventas y seguimiento de las entradas y salidas
+            de existencias.
+          </li>
+          <li>
+            <strong>Gestión de la farmacia.</strong>
+            Administración del catálogo de productos y de los empleados
+            desde la aplicación.
+          </li>
+        </ul>
 
-          <a
-            class="project-link"
-            href="https://github.com/celguanche/CustomerDataImporter"
-          >
-            Ver Customer Data Importer en GitHub
-          </a>
-        </article>
-
-        <article class="card project">
-          <h3>FarmaGest</h3>
-
-          <ul class="tags" aria-label="Tecnologías de FarmaGest">
-            <li>Java</li>
-            <li>JavaFX</li>
-            <li>JDBC</li>
-            <li>MySQL</li>
-          </ul>
-
-          <p>
-            Aplicación de escritorio para gestionar las operaciones de una
-            farmacia y seguir cómo afectan las compras y las ventas al inventario.
-          </p>
-
-          <ul class="features">
-            <li>
-              Reúne la gestión de productos, proveedores y empleados en una
-              interfaz de JavaFX.
-            </li>
-            <li>
-              Permite añadir varios productos con sus cantidades a un mismo
-              pedido de compra o a una venta.
-            </li>
-            <li>
-              Registra las entradas y salidas de existencias y guarda las
-              operaciones en MySQL mediante JDBC.
-            </li>
-          </ul>
-
-          <a
-            class="project-link"
-            href="https://github.com/celguanche/FarmaGest"
-          >
+        <div class="actions">
+          <a class="button" href="https://github.com/celguanche/FarmaGest">
             Ver FarmaGest en GitHub
           </a>
-        </article>
-      </div>
+        </div>
+      </article>
+
+      <article aria-labelledby="titulo-importer" style="margin-top: 2rem;">
+        <h3 id="titulo-importer">Customer Data Importer</h3>
+
+        <ul class="tags" aria-label="Tecnologías de Customer Data Importer">
+          <li>Java 21</li>
+          <li>JavaFX</li>
+          <li>JDBC</li>
+          <li>MySQL</li>
+          <li>Apache Commons CSV</li>
+        </ul>
+
+        <p>
+          Herramienta para revisar archivos CSV antes de importar clientes
+          a MySQL. Detecta errores y DNI duplicados, permite comparar los
+          registros existentes y exporta las filas rechazadas para corregirlas.
+          Probé el lector con <strong>500 clientes ficticios de seis campos</strong>.
+        </p>
+
+        <a href="https://github.com/celguanche/CustomerDataImporter">
+          Ver Customer Data Importer en GitHub
+        </a>
+      </article>
     </section>
 
-    <section id="trayectoria" aria-labelledby="titulo-trayectoria">
-      <h2 id="titulo-trayectoria">Formación y experiencia</h2>
+    <section id="formacion" aria-labelledby="titulo-formacion">
+      <h2 id="titulo-formacion">Formación</h2>
 
       <div class="grid">
         <article class="card">
-          <div class="entry">
-            <h3>Desarrollo de Aplicaciones Multiplataforma</h3>
-            <p class="meta">
-              FP Euroformac · Barajas, Madrid · Septiembre de 2025 – actualidad
-            </p>
-            <p>
-              Curso segundo de DAM. Trabajo con interfaces de escritorio,
-              acceso a bases de datos y arquitectura cloud en AWS Academy.
-            </p>
-          </div>
-
-          <div class="entry">
-            <h3>Ingeniería Informática</h3>
-            <p class="meta">
-              Universidad Tecnológica de La Habana · Septiembre de 2022 – abril de 2024
-            </p>
-            <p>
-              Cursé dos años de la carrera, con formación en algoritmos,
-              estructuras de datos y programación orientada a objetos.
-            </p>
-          </div>
+          <h3>Desarrollo de Aplicaciones Multiplataforma</h3>
+          <p class="meta">
+            FP Euroformac · Barajas, Madrid · Septiembre de 2025 – actualidad
+          </p>
+          <p>
+            Curso segundo de DAM. Trabajo con programación orientada a
+            objetos, interfaces de escritorio, acceso a datos y desarrollo
+            móvil. También estudio arquitectura cloud en AWS Academy.
+          </p>
         </article>
 
         <article class="card">
-          <div class="entry">
-            <h3>Dependiente · New Yorker</h3>
-            <p class="meta">Septiembre de 2025 – actualidad</p>
-            <p>Atención al cliente, reposición de mercancía y cobro en caja.</p>
-          </div>
-
-          <div class="entry">
-            <h3>Cajero · Eroski</h3>
-            <p class="meta">Diciembre de 2025 – septiembre de 2026</p>
-            <p>
-              Cobro y resolución de incidencias en caja durante los turnos
-              de mayor afluencia.
-            </p>
-          </div>
+          <h3>Ingeniería Informática</h3>
+          <p class="meta">
+            Universidad Tecnológica de La Habana · Septiembre de 2022 – abril de 2024
+          </p>
+          <p>
+            Cursé dos años de la carrera, con formación en algoritmos,
+            estructuras de datos y programación orientada a objetos.
+          </p>
         </article>
       </div>
     </section>
@@ -479,15 +450,19 @@
       <h2 id="titulo-habilidades">Conocimientos técnicos</h2>
 
       <dl class="skills">
-        <dt>Desarrollo de escritorio</dt>
+        <dt>Aplicaciones de escritorio</dt>
+        <dd>Java, JavaFX y Maven. Control de versiones con Git y GitHub.</dd>
+
+        <dt>Bases de datos</dt>
         <dd>
-          Java, JavaFX y Maven. Control de versiones con Git y GitHub.
+          SQL, MySQL y JDBC. Consultas con sentencias preparadas,
+          transacciones y prácticas con Oracle SQL.
         </dd>
 
-        <dt>Acceso a datos</dt>
+        <dt>Tratamiento de datos</dt>
         <dd>
-          SQL, MySQL y JDBC. Uso de sentencias preparadas y transacciones.
-          Prácticas con Oracle SQL y con archivos CSV, JSON y XML.
+          Lectura y validación de CSV, gestión de duplicados y registro
+          de errores por fila. Prácticas con JSON y XML.
         </dd>
 
         <dt>Desarrollo móvil y web</dt>
@@ -498,8 +473,8 @@
 
         <dt>Formación complementaria</dt>
         <dd>
-          Cloud Foundation (AWS), Networking Basics, Networking Devices and
-          Initial Configuration y C++ Essentials 1 (Cisco), 2026.
+          Cloud Foundation (AWS). Networking Basics, Networking Devices
+          and Initial Configuration y C++ Essentials 1 (Cisco).
         </dd>
 
         <dt>Idiomas</dt>
@@ -511,9 +486,8 @@
       <h2 id="titulo-contacto">Contacto</h2>
 
       <p class="intro">
-        Busco prácticas curriculares de DAM en Madrid. Me interesa trabajar
-        con equipos que desarrollen aplicaciones de gestión o conecten
-        sistemas mediante APIs y procesos de importación.
+        Si tu equipo ofrece prácticas de desarrollo en Madrid, puedes
+        escribirme por correo o contactar conmigo en LinkedIn.
       </p>
 
       <div class="actions">
@@ -521,7 +495,9 @@
           celguanche@gmail.com
         </a>
         <a href="https://github.com/celguanche">GitHub</a>
-        <a href="https://www.linkedin.com/in/celguanche-luis-ernesto/">LinkedIn</a>
+        <a href="https://www.linkedin.com/in/celguanche-luis-ernesto/">
+          LinkedIn
+        </a>
       </div>
     </section>
   </main>
