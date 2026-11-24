@@ -1,290 +1,533 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Luis Ernesto Guanche — Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --bg: #f7f6f3;
-    --surface: #ffffff;
-    --border: #e2e0d8;
-    --text: #1a1917;
-    --muted: #6b6860;
-    --accent: #1a4fd6;
-    --accent-light: #e8eefb;
-    --tag-bg: #eeecea;
-    --nav-h: 60px;
-    --font: 'DM Sans', sans-serif;
-    --mono: 'DM Mono', monospace;
-  }
-  body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.6; font-size: 15px; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  nav {
-    position: sticky; top: 0; z-index: 100;
-    background: rgba(247,246,243,0.92); backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--border);
-    height: var(--nav-h); display: flex; align-items: center;
-    justify-content: space-between; padding: 0 2rem;
-  }
-  .nav-logo { font-family: var(--mono); font-size: 14px; font-weight: 500; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
-  .nav-logo span { color: var(--accent); }
-  nav ul { list-style: none; display: flex; gap: 0; }
-  nav ul li a { font-size: 13px; font-weight: 400; color: var(--muted); text-decoration: none; padding: 6px 14px; border-radius: 6px; transition: all 0.15s; }
-  nav ul li a:hover { color: var(--text); background: var(--tag-bg); }
+  <title>Luis Ernesto Guanche Queija · Portfolio DAM</title>
+  <meta
+    name="description"
+    content="Portfolio de Luis Ernesto Guanche Queija, estudiante de 2.º de DAM en Madrid. Aplicaciones de escritorio e integración de datos con Java, JavaFX y MySQL."
+  >
 
-  .hero { max-width: 760px; margin: 0 auto; padding: 6rem 2rem 5rem; }
-  .hero-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; color: var(--accent); background: var(--accent-light); padding: 4px 12px; border-radius: 100px; margin-bottom: 1.5rem; letter-spacing: 0.02em; }
-  .hero-badge::before { content: ''; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
-  .hero h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 600; line-height: 1.15; letter-spacing: -0.04em; margin-bottom: 1.25rem; }
-  .hero h1 em { font-style: normal; color: var(--muted); }
-  .hero p { font-size: 17px; color: var(--muted); max-width: 540px; margin-bottom: 2.5rem; line-height: 1.7; font-weight: 300; }
-  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
-  .btn-primary { background: var(--text); color: #fff; border: none; padding: 11px 24px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; font-family: var(--font); text-decoration: none; display: inline-block; transition: opacity 0.15s; }
-  .btn-primary:hover { opacity: 0.82; }
-  .btn-secondary { background: transparent; color: var(--text); border: 1px solid var(--border); padding: 11px 24px; border-radius: 8px; font-size: 14px; font-weight: 400; cursor: pointer; font-family: var(--font); text-decoration: none; display: inline-block; transition: border-color 0.15s, background 0.15s; }
-  .btn-secondary:hover { border-color: var(--muted); background: var(--tag-bg); }
+  <style>
+    :root {
+      --background: #f7f6f3;
+      --surface: #ffffff;
+      --text: #1a1917;
+      --muted: #595750;
+      --accent: #194abd;
+      --accent-light: #eaf0ff;
+      --border: #dedcd4;
+      --content-width: 60rem;
+    }
 
-  .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
 
-  section { max-width: 760px; margin: 0 auto; padding: 4rem 2rem; }
-  .section-label { font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.5rem; }
-  .section-title { font-size: 1.6rem; font-weight: 600; letter-spacing: -0.03em; margin-bottom: 2rem; }
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--text);
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-size: 1rem;
+      line-height: 1.65;
+    }
 
-  .about-text { font-size: 16px; color: var(--muted); line-height: 1.8; font-weight: 300; margin-bottom: 1.5rem; }
-  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
-  .about-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem 1.5rem; }
-  .about-card h4 { font-size: 12px; font-weight: 500; color: var(--muted); margin-bottom: 0.4rem; font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.04em; }
-  .about-card p { font-size: 15px; line-height: 1.5; }
+    .container {
+      width: min(calc(100% - 2.5rem), var(--content-width));
+      margin-inline: auto;
+    }
 
-  .projects-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
-  .project-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; display: flex; flex-direction: row; transition: border-color 0.2s, transform 0.2s; }
-  .project-card:hover { border-color: #bbb; transform: translateY(-2px); }
-  .project-preview { width: 180px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #e8eefb 0%, #c7d8f7 100%); font-size: 3rem; }
-  .project-body { padding: 1.5rem; flex: 1; }
-  .project-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 0.75rem; }
-  .tag { font-size: 11px; font-weight: 500; background: var(--tag-bg); color: var(--muted); padding: 3px 9px; border-radius: 100px; font-family: var(--mono); }
-  .project-body h3 { font-size: 18px; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
-  .project-body p { font-size: 14px; color: var(--muted); line-height: 1.6; margin-bottom: 1.25rem; }
-  .project-links { display: flex; gap: 10px; }
-  .project-link { font-size: 12px; font-weight: 500; color: var(--accent); text-decoration: none; display: flex; align-items: center; gap: 5px; background: var(--accent-light); padding: 6px 14px; border-radius: 6px; transition: opacity 0.15s; }
-  .project-link:hover { opacity: 0.75; }
+    h1,
+    h2,
+    h3 {
+      margin-top: 0;
+      line-height: 1.15;
+      letter-spacing: -0.035em;
+    }
 
-  .skills-groups { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
-  .skill-group { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem 1.5rem; }
-  .skill-group h4 { font-size: 12px; font-weight: 500; color: var(--muted); margin-bottom: 0.9rem; font-family: var(--mono); letter-spacing: 0.04em; text-transform: uppercase; }
-  .skill-list { display: flex; flex-direction: column; gap: 10px; }
-  .skill-item { display: flex; align-items: center; gap: 10px; }
-  .skill-name { font-size: 13px; font-weight: 500; width: 110px; flex-shrink: 0; }
-  .skill-bar { flex: 1; height: 4px; background: var(--tag-bg); border-radius: 2px; overflow: hidden; }
-  .skill-fill { height: 100%; background: var(--accent); border-radius: 2px; width: 0; transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1); }
+    h1 {
+      max-width: 16ch;
+      margin-bottom: 1.2rem;
+      font-size: clamp(2.7rem, 7vw, 4.8rem);
+    }
 
-  .contact-box { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 2.5rem; text-align: center; max-width: 520px; margin: 0 auto; }
-  .contact-box h3 { font-size: 1.3rem; font-weight: 600; margin-bottom: 0.6rem; letter-spacing: -0.03em; }
-  .contact-box p { font-size: 14px; color: var(--muted); margin-bottom: 1.8rem; line-height: 1.7; }
-  .contact-links { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-  .contact-link { display: flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 500; color: var(--text); text-decoration: none; background: var(--tag-bg); padding: 9px 18px; border-radius: 8px; border: 1px solid var(--border); transition: background 0.15s, border-color 0.15s; }
-  .contact-link:hover { background: var(--accent-light); border-color: #b5c9f4; color: var(--accent); }
+    h2 {
+      margin-bottom: 1.5rem;
+      font-size: clamp(1.7rem, 4vw, 2.2rem);
+    }
 
-  footer { text-align: center; padding: 2rem; font-size: 12px; color: var(--muted); border-top: 1px solid var(--border); font-family: var(--mono); }
+    h3 {
+      margin-bottom: 0.6rem;
+      font-size: 1.25rem;
+    }
 
-  @media (max-width: 600px) {
-    nav ul { display: none; }
-    .about-grid, .skills-groups { grid-template-columns: 1fr; }
-    .project-card { flex-direction: column; }
-    .project-preview { width: 100%; height: 120px; }
-  }
-</style>
-</head>
-<body>
+    p {
+      margin: 0 0 1rem;
+    }
 
-<nav>
-  <a class="nav-logo" href="#"><span>//</span> celguanche.dev</a>
-  <ul>
-    <li><a href="#sobre-mi">Sobre mí</a></li>
-    <li><a href="#proyectos">Proyectos</a></li>
-    <li><a href="#habilidades">Stack</a></li>
-    <li><a href="#contacto">Contacto</a></li>
-  </ul>
-</nav>
+    a {
+      color: var(--accent);
+      text-underline-offset: 0.2em;
+    }
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-badge">Disponible para prácticas · Madrid</div>
-  <h1>Hola, soy <em>Luis Ernesto</em>.<br>Estudiante de DAM.</h1>
-  <p>Desarrollo aplicaciones de escritorio y sistemas backend con Java. Apasionado por construir software útil, limpio y bien estructurado. Busco mi primer paso en el mundo profesional.</p>
-  <div class="hero-actions">
-    <a class="btn-primary" href="#proyectos">Ver proyectos</a>
-    <a class="btn-secondary" href="#contacto">Contactar</a>
-  </div>
-</div>
+    a:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 4px;
+    }
 
-<hr class="divider">
+    .skip-link {
+      position: absolute;
+      top: -5rem;
+      left: 1rem;
+      z-index: 2;
+      padding: 0.5rem 0.9rem;
+      background: var(--surface);
+    }
 
-<!-- SOBRE MÍ -->
-<section id="sobre-mi">
-  <div class="section-label">01 — Sobre mí</div>
-  <div class="section-title">Quién soy</div>
-  <p class="about-text">Soy Luis Ernesto Guanche, estudiante de Desarrollo de Aplicaciones Multiplataforma en Madrid. Me apasiona el desarrollo backend y de sistemas, construir lógica sólida y aplicaciones que resuelvan problemas reales. Más que buscar un trabajo, quiero seguir aprendiendo y encaminar bien mi futuro profesional.</p>
-  <div class="about-grid">
-    <div class="about-card">
-      <h4>Formación</h4>
-      <p>CFGS — Desarrollo de<br>Aplicaciones Multiplataforma<br><span style="color: var(--muted); font-size: 13px;">Madrid · En curso</span></p>
-    </div>
-    <div class="about-card">
-      <h4>Buscando</h4>
-      <p>Prácticas o primer empleo<br>como desarrollador<br><span style="color: var(--muted); font-size: 13px;">Madrid o remoto</span></p>
-    </div>
-    <div class="about-card">
-      <h4>Enfoque</h4>
-      <p>Backend · Sistemas<br>Aplicaciones de escritorio</p>
-    </div>
-    <div class="about-card">
-      <h4>Objetivo</h4>
-      <p>Aprender, crecer<br>y aportar desde el día uno</p>
-    </div>
-  </div>
-</section>
+    .skip-link:focus {
+      top: 0.75rem;
+    }
 
-<hr class="divider">
+    header {
+      border-bottom: 1px solid var(--border);
+    }
 
-<!-- PROYECTOS -->
-<section id="proyectos">
-  <div class="section-label">02 — Proyectos</div>
-  <div class="section-title">Lo que he construido</div>
-  <div class="projects-grid">
+    .navigation,
+    .navigation-links,
+    .actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.25rem;
+    }
 
-    <div class="project-card">
-      <div class="project-preview">💊</div>
-      <div class="project-body">
-        <div class="project-tags">
-          <span class="tag">Java</span>
-          <span class="tag">JavaFX</span>
-          <span class="tag">FXML</span>
-          <span class="tag">MySQL</span>
-          <span class="tag">JDBC</span>
-        </div>
-        <h3>FarmaGest</h3>
-        <p>Aplicación de escritorio para la gestión integral de una farmacia. Permite administrar el inventario de medicamentos, control de stock, registro de ventas y gestión de proveedores, con una interfaz gráfica desarrollada en JavaFX.</p>
-        <div class="project-links">
-          <a class="project-link" href="https://github.com/celguanche" target="_blank">
-            <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-            Ver en GitHub
-          </a>
-        </div>
-      </div>
-    </div>
+    .navigation {
+      justify-content: space-between;
+      padding-block: 1rem;
+    }
 
-    <div class="project-card" style="border-style: dashed; opacity: 0.7;">
-      <div class="project-preview" style="background: linear-gradient(135deg, #f1f0ee 0%, #e2e0d8 100%); font-size: 2rem; color: var(--muted);">+</div>
-      <div class="project-body" style="display: flex; flex-direction: column; justify-content: center;">
-        <h3 style="color: var(--muted); font-size: 16px;">Próximo proyecto</h3>
-        <p style="font-size: 13px;">En construcción. Cada proyecto es un paso más en el aprendizaje.</p>
-      </div>
-    </div>
+    .navigation a {
+      color: var(--text);
+      text-decoration: none;
+    }
 
-  </div>
-</section>
+    .navigation a:hover {
+      color: var(--accent);
+      text-decoration: underline;
+    }
 
-<hr class="divider">
+    .brand {
+      font-weight: 700;
+    }
 
-<!-- HABILIDADES -->
-<section id="habilidades">
-  <div class="section-label">03 — Stack</div>
-  <div class="section-title">Habilidades técnicas</div>
-  <div class="skills-groups">
+    .navigation-links {
+      font-size: 0.9rem;
+    }
 
-    <div class="skill-group">
-      <h4>Lenguajes</h4>
-      <div class="skill-list">
-        <div class="skill-item"><span class="skill-name">Java</span><div class="skill-bar"><div class="skill-fill" data-width="75"></div></div></div>
-        <div class="skill-item"><span class="skill-name">HTML / CSS</span><div class="skill-bar"><div class="skill-fill" data-width="65"></div></div></div>
-        <div class="skill-item"><span class="skill-name">JavaScript</span><div class="skill-bar"><div class="skill-fill" data-width="50"></div></div></div>
-        <div class="skill-item"><span class="skill-name">SQL</span><div class="skill-bar"><div class="skill-fill" data-width="70"></div></div></div>
-      </div>
-    </div>
+    main section {
+      padding-block: 3rem;
+      border-bottom: 1px solid var(--border);
+    }
 
-    <div class="skill-group">
-      <h4>Tecnologías</h4>
-      <div class="skill-list">
-        <div class="skill-item"><span class="skill-name">JavaFX / FXML</span><div class="skill-bar"><div class="skill-fill" data-width="70"></div></div></div>
-        <div class="skill-item"><span class="skill-name">JDBC</span><div class="skill-bar"><div class="skill-fill" data-width="68"></div></div></div>
-        <div class="skill-item"><span class="skill-name">Spring</span><div class="skill-bar"><div class="skill-fill" data-width="35"></div></div></div>
-        <div class="skill-item"><span class="skill-name">Maven</span><div class="skill-bar"><div class="skill-fill" data-width="55"></div></div></div>
-      </div>
-    </div>
+    main section:last-child {
+      border-bottom: 0;
+    }
 
-    <div class="skill-group">
-      <h4>Bases de datos</h4>
-      <div class="skill-list">
-        <div class="skill-item"><span class="skill-name">MySQL</span><div class="skill-bar"><div class="skill-fill" data-width="72"></div></div></div>
-        <div class="skill-item"><span class="skill-name">PostgreSQL</span><div class="skill-bar"><div class="skill-fill" data-width="45"></div></div></div>
-        <div class="skill-item"><span class="skill-name">SQL básico</span><div class="skill-bar"><div class="skill-fill" data-width="75"></div></div></div>
-      </div>
-    </div>
+    .hero {
+      padding-block: clamp(3.5rem, 8vw, 6rem);
+    }
 
-    <div class="skill-group">
-      <h4>Herramientas</h4>
-      <div class="skill-list">
-        <div class="skill-item"><span class="skill-name">Git / GitHub</span><div class="skill-bar"><div class="skill-fill" data-width="65"></div></div></div>
-        <div class="skill-item"><span class="skill-name">IntelliJ IDEA</span><div class="skill-bar"><div class="skill-fill" data-width="72"></div></div></div>
-        <div class="skill-item"><span class="skill-name">Scene Builder</span><div class="skill-bar"><div class="skill-fill" data-width="68"></div></div></div>
-        <div class="skill-item"><span class="skill-name">Linux</span><div class="skill-bar"><div class="skill-fill" data-width="45"></div></div></div>
-      </div>
-    </div>
+    .eyebrow {
+      margin-bottom: 0.8rem;
+      color: var(--accent);
+      font-family: ui-monospace, monospace;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
 
-  </div>
-</section>
+    .intro {
+      max-width: 63ch;
+      font-size: 1.12rem;
+    }
 
-<hr class="divider">
+    .actions {
+      margin-top: 1.5rem;
+    }
 
-<!-- CONTACTO -->
-<section id="contacto">
-  <div class="section-label">04 — Contacto</div>
-  <div class="section-title">Hablemos</div>
-  <div class="contact-box">
-    <h3>¿Tienes una oportunidad para mí?</h3>
-    <p>Estoy buscando activamente prácticas o mi primer empleo como desarrollador en Madrid. Tengo ganas de aprender, trabajar duro y aportar desde el primer día.</p>
-    <div class="contact-links">
-      <a class="contact-link" href="mailto:celguanche@gmail.com">
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.708 2.825L15 11.105V5.383zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741zM1 11.105l4.708-2.897L1 5.383v5.722z"/></svg>
-        celguanche@gmail.com
-      </a>
-      <a class="contact-link" href="https://github.com/celguanche" target="_blank">
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-        GitHub
-      </a>
-      <a class="contact-link" href="https://www.linkedin.com/in/celguanche-luis-ernesto/" target="_blank">
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/></svg>
-        LinkedIn
-      </a>
-    </div>
-  </div>
-</section>
+    .button {
+      display: inline-block;
+      padding: 0.65rem 1.1rem;
+      border-radius: 0.5rem;
+      background: var(--text);
+      color: white;
+      font-weight: 600;
+      text-decoration: none;
+    }
 
-<footer>// Luis Ernesto Guanche Queija · Madrid · 2025</footer>
+    .button:hover {
+      background: var(--accent);
+    }
 
-<script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.querySelectorAll('.skill-fill').forEach(fill => {
-          fill.style.width = fill.dataset.width + '%';
-        });
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      padding: clamp(1.2rem, 3vw, 1.75rem);
+      border: 1px solid var(--border);
+      border-radius: 0.9rem;
+      background: var(--surface);
+    }
+
+    .project {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-link {
+      align-self: flex-start;
+      margin-top: auto;
+      padding-top: 0.75rem;
+      font-weight: 600;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin: 0.25rem 0 1.1rem;
+      padding: 0;
+      list-style: none;
+    }
+
+    .tags li {
+      padding: 0.2rem 0.55rem;
+      border-radius: 0.4rem;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-family: ui-monospace, monospace;
+      font-size: 0.78rem;
+    }
+
+    .features {
+      margin: 0 0 1rem;
+      padding-left: 1.2rem;
+    }
+
+    .features li + li {
+      margin-top: 0.5rem;
+    }
+
+    .meta {
+      margin-bottom: 0.65rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .entry + .entry {
+      margin-top: 1.35rem;
+      padding-top: 1.35rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .entry p:last-child,
+    .card > p:last-child {
+      margin-bottom: 0;
+    }
+
+    .skills {
+      display: grid;
+      grid-template-columns: minmax(9rem, 0.35fr) 1fr;
+      margin: 0;
+    }
+
+    .skills dt,
+    .skills dd {
+      margin: 0;
+      padding-block: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .skills dt {
+      padding-right: 1rem;
+      font-weight: 650;
+    }
+
+    .skills dd {
+      color: var(--muted);
+    }
+
+    footer {
+      padding-block: 1.2rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    footer p {
+      margin-bottom: 0;
+    }
+
+    @media (max-width: 38rem) {
+      .navigation {
+        align-items: flex-start;
+        flex-direction: column;
       }
-    });
-  }, { threshold: 0.3 });
-  const skillsSection = document.getElementById('habilidades');
-  if (skillsSection) observer.observe(skillsSection);
 
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const target = document.querySelector(a.getAttribute('href'));
-      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-    });
-  });
-</script>
+      .navigation-links {
+        gap: 0.5rem 1rem;
+      }
+
+      .skills {
+        grid-template-columns: 1fr;
+      }
+
+      .skills dt {
+        padding-bottom: 0;
+        border-bottom: 0;
+      }
+
+      .skills dd {
+        padding-top: 0.2rem;
+      }
+    }
+  </style>
+</head>
+
+<body id="inicio">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <header>
+    <nav class="container navigation" aria-label="Navegación principal">
+      <a class="brand" href="#inicio">Luis E. Guanche</a>
+
+      <div class="navigation-links">
+        <a href="#proyectos">Proyectos</a>
+        <a href="#trayectoria">Trayectoria</a>
+        <a href="#habilidades">Habilidades</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="contenido" class="container">
+    <section class="hero" aria-labelledby="nombre">
+      <p class="eyebrow">2.º de DAM · Madrid</p>
+
+      <h1 id="nombre">Luis Ernesto Guanche Queija</h1>
+
+      <p class="intro">
+        Desarrollo aplicaciones de escritorio con Java y MySQL. Con FarmaGest
+        trabajo con pedidos, ventas y existencias. En Customer Data Importer
+        me he centrado en cómo detectar duplicados y recuperar datos cuando
+        falla una importación.
+      </p>
+
+      <p>Busco prácticas curriculares en desarrollo de software e integración de datos.</p>
+
+      <div class="actions">
+        <a class="button" href="#proyectos">Ver proyectos</a>
+        <a href="mailto:celguanche@gmail.com">Contactar por email</a>
+      </div>
+    </section>
+
+    <section id="proyectos" aria-labelledby="titulo-proyectos">
+      <h2 id="titulo-proyectos">Proyectos</h2>
+
+      <div class="grid">
+        <article class="card project">
+          <h3>Customer Data Importer</h3>
+
+          <ul class="tags" aria-label="Tecnologías de Customer Data Importer">
+            <li>Java 21</li>
+            <li>JavaFX</li>
+            <li>JDBC</li>
+            <li>MySQL</li>
+            <li>Apache Commons CSV</li>
+          </ul>
+
+          <p>
+            Aplicación de escritorio para revisar un archivo de clientes
+            antes de incorporarlo a MySQL. La vista previa separa los clientes
+            nuevos, los existentes y las filas que necesitan corrección.
+          </p>
+
+          <ul class="features">
+            <li>
+              Comprueba la letra de control del DNI, el código postal y el
+              formato del correo. También detecta DNI repetidos en el archivo.
+            </li>
+            <li>
+              Permite comparar los datos del CSV con los de MySQL y elegir qué
+              clientes actualizar. Si un campo opcional llega vacío, conserva
+              su valor anterior.
+            </li>
+            <li>
+              Registra los rechazos con fecha, número de línea y motivo.
+              Las filas rechazadas se pueden exportar, corregir y volver a cargar.
+            </li>
+          </ul>
+
+          <p>
+            Probé el lector con <strong>500 clientes ficticios de seis campos</strong>
+            y mantuve la compatibilidad con los CSV originales de tres columnas.
+          </p>
+
+          <a
+            class="project-link"
+            href="https://github.com/celguanche/CustomerDataImporter"
+          >
+            Ver Customer Data Importer en GitHub
+          </a>
+        </article>
+
+        <article class="card project">
+          <h3>FarmaGest</h3>
+
+          <ul class="tags" aria-label="Tecnologías de FarmaGest">
+            <li>Java</li>
+            <li>JavaFX</li>
+            <li>JDBC</li>
+            <li>MySQL</li>
+          </ul>
+
+          <p>
+            Aplicación de escritorio para gestionar las operaciones de una
+            farmacia y seguir cómo afectan las compras y las ventas al inventario.
+          </p>
+
+          <ul class="features">
+            <li>
+              Reúne la gestión de productos, proveedores y empleados en una
+              interfaz de JavaFX.
+            </li>
+            <li>
+              Permite añadir varios productos con sus cantidades a un mismo
+              pedido de compra o a una venta.
+            </li>
+            <li>
+              Registra las entradas y salidas de existencias y guarda las
+              operaciones en MySQL mediante JDBC.
+            </li>
+          </ul>
+
+          <a
+            class="project-link"
+            href="https://github.com/celguanche/FarmaGest"
+          >
+            Ver FarmaGest en GitHub
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <section id="trayectoria" aria-labelledby="titulo-trayectoria">
+      <h2 id="titulo-trayectoria">Formación y experiencia</h2>
+
+      <div class="grid">
+        <article class="card">
+          <div class="entry">
+            <h3>Desarrollo de Aplicaciones Multiplataforma</h3>
+            <p class="meta">
+              FP Euroformac · Barajas, Madrid · Septiembre de 2025 – actualidad
+            </p>
+            <p>
+              Curso segundo de DAM. Trabajo con interfaces de escritorio,
+              acceso a bases de datos y arquitectura cloud en AWS Academy.
+            </p>
+          </div>
+
+          <div class="entry">
+            <h3>Ingeniería Informática</h3>
+            <p class="meta">
+              Universidad Tecnológica de La Habana · Septiembre de 2022 – abril de 2024
+            </p>
+            <p>
+              Cursé dos años de la carrera, con formación en algoritmos,
+              estructuras de datos y programación orientada a objetos.
+            </p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="entry">
+            <h3>Dependiente · New Yorker</h3>
+            <p class="meta">Septiembre de 2025 – actualidad</p>
+            <p>Atención al cliente, reposición de mercancía y cobro en caja.</p>
+          </div>
+
+          <div class="entry">
+            <h3>Cajero · Eroski</h3>
+            <p class="meta">Diciembre de 2025 – septiembre de 2026</p>
+            <p>
+              Cobro y resolución de incidencias en caja durante los turnos
+              de mayor afluencia.
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="habilidades" aria-labelledby="titulo-habilidades">
+      <h2 id="titulo-habilidades">Conocimientos técnicos</h2>
+
+      <dl class="skills">
+        <dt>Desarrollo de escritorio</dt>
+        <dd>
+          Java, JavaFX y Maven. Control de versiones con Git y GitHub.
+        </dd>
+
+        <dt>Acceso a datos</dt>
+        <dd>
+          SQL, MySQL y JDBC. Uso de sentencias preparadas y transacciones.
+          Prácticas con Oracle SQL y con archivos CSV, JSON y XML.
+        </dd>
+
+        <dt>Desarrollo móvil y web</dt>
+        <dd>
+          Prácticas con Kotlin y Jetpack Compose. Conocimientos de HTML,
+          CSS y JavaScript.
+        </dd>
+
+        <dt>Formación complementaria</dt>
+        <dd>
+          Cloud Foundation (AWS), Networking Basics, Networking Devices and
+          Initial Configuration y C++ Essentials 1 (Cisco), 2026.
+        </dd>
+
+        <dt>Idiomas</dt>
+        <dd>Español nativo e inglés B2.</dd>
+      </dl>
+    </section>
+
+    <section id="contacto" aria-labelledby="titulo-contacto">
+      <h2 id="titulo-contacto">Contacto</h2>
+
+      <p class="intro">
+        Busco prácticas curriculares de DAM en Madrid. Me interesa trabajar
+        con equipos que desarrollen aplicaciones de gestión o conecten
+        sistemas mediante APIs y procesos de importación.
+      </p>
+
+      <div class="actions">
+        <a class="button" href="mailto:celguanche@gmail.com">
+          celguanche@gmail.com
+        </a>
+        <a href="https://github.com/celguanche">GitHub</a>
+        <a href="https://www.linkedin.com/in/celguanche-luis-ernesto/">LinkedIn</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p class="container">Luis Ernesto Guanche Queija · Madrid</p>
+  </footer>
 </body>
 </html>
